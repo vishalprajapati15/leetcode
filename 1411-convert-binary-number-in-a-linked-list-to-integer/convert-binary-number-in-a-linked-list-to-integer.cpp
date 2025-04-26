@@ -11,23 +11,13 @@
 class Solution {
 public:
     int getDecimalValue(ListNode* head) {
-        vector<int> bin;
+        int ans = 0;
+        const int MOD = 1000000007;
         ListNode * temp = head;
-        if(temp == NULL){
-            return 0;
-        }
-        while(temp!=NULL){
-            bin.push_back(temp->val);
+        while(temp != NULL){
+            ans = (ans * 2 + temp->val) % MOD;
             temp = temp->next;
         }
-        reverse(bin.begin(), bin.end());
-        int decimal = 0;
-        for(int i=0;i<bin.size();i++){
-            if(bin[i] == 1){
-                int deci = pow(2,i);
-                decimal = decimal + deci;
-            }
-        }
-        return decimal;
+        return ans;
     }
 };
