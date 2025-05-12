@@ -1,26 +1,35 @@
 class Solution {
 public:
     vector<int> findEvenNumbers(vector<int>& digits) {
-        vector<int> ans;
-        unordered_set<int>set;
-        for(int i=0; i<digits.size();i++){
-            for(int j = 0; j<digits.size(); j++){
-                for(int k = 0; k<digits.size(); k++){
-                    if(i == j || i == k || j == k){
+        vector<int>ans;
+        vector<int> map(10, 0);
+        for(int &digit : digits){
+            map[digit]++;
+        }
+        
+        for(int i=1; i<=9;i++){
+            if(map[i] == 0){
+                continue;
+            }
+            map[i]--;
+            for(int j = 0;j<=9;j++){
+                if(map[j] == 0){
+                    continue;
+                }
+                map[j]--;
+                for(int k =0; k<9; k += 2){
+                    if(map[k] == 0){
                         continue;
                     }
-                    int digit = digits[i] * 100 + digits[j] * 10 + digits[k];
-                    if(digit >= 100 && digit % 2 == 0){
-                        // ans.push_back(digit);
-                        set.insert(digit);
-                    }
+                    map[k]--;
+                    int num = i * 100 + j * 10 + k * 1;
+                    ans.push_back(num);
+                    map[k]++;
                 }
+                map[j]++;
             }
+            map[i]++;
         }
-        for(int ele : set){
-            ans.push_back(ele);
-        }
-        sort(ans.begin(), ans.end());
         return ans;
     }
 };
