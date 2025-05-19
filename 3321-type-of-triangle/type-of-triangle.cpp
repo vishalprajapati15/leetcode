@@ -5,19 +5,19 @@ public:
         int b = nums[1];
         int c = nums[2];
         bool valid = a + b > c && b + c > a && a + c > b;
-        if(valid){
-            if(a == b && a == c && b == c){
-            return "equilateral";
-            }
-            else if(a != b && a != c && b != c){
-                return "scalene";
-            }
-            else{
-                return "isosceles";
-            }
-        }
-        else{
+        if(!valid){
             return "none";
         }
+        
+        if(a == b && a == c && b == c){
+        return "equilateral";
+        }
+        else if(a != b && a != c && b != c){
+            return "scalene";
+        }
+        else{
+            return "isosceles";
+        }
+       
     }
 };
