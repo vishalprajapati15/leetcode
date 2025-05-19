@@ -4,7 +4,8 @@ public:
         int a = nums[0];
         int b = nums[1];
         int c = nums[2];
-        if(a + b > c && a+c > b && b+c >a){
+        bool valid = a + b > c && b + c > a && a + c > b;
+        if(valid){
             if(a == b && a == c && b == c){
             return "equilateral";
             }
