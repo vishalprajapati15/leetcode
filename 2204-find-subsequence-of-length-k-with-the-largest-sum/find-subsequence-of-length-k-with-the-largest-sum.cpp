@@ -1,24 +1,29 @@
 class Solution {
 public:
     vector<int> maxSubsequence(vector<int>& nums, int k) {
-        int n =  nums.size();
+        int n = nums.size();
         if(k == n){
             return nums;
         }
-        vector<pair<int, int>> vec(n);
-        for(int i=0;i<n;i++){
-            vec[i] = make_pair(i, nums[i]);
-        }
-        auto lambda = [](auto & p1, auto &p2){
-            return p1.second > p2.second; // sorting
-        };
-        sort(begin(vec), end(vec), lambda);
-        sort(begin(vec), begin(vec) + k);    // top k element presentin correct order
-        vector<int>ans(k);
-        for(int i=0;i<k;i++){
-            ans[i] = vec[i].second;
+        vector<int>temp(nums);           // copy nums;
+        nth_element(begin(temp), begin(temp) + k -1, end(temp), greater<int>());            // kth largest at right index 
+        // O(n)
+        int kthLargets = temp[k-1];
+        int countKthlargest = count(begin(temp), begin(temp) + k, kthLargets);
+
+        vector<int>ans;
+        for(auto &num : nums){
+            if(num > kthLargets){
+                ans.push_back(num);
+            }
+            else if(num == kthLargets && countKthlargest > 0){
+                ans.push_back(num); 
+                countKthlargest--;
+            }
+            if(ans.size() == k){
+                break;
+            }
         }
         return ans;
-
     }
 };
