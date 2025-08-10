@@ -4,9 +4,11 @@ public:
         if(n < 1){
             return false;
         }
-        while(n%2 == 0){
-            n /= 2;
+        if((n & n-1) == 0){
+            return true;
+        } 
+        else{
+            return false;
         }
-        return n == 1;
     }
 };
