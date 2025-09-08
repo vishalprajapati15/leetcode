@@ -3,15 +3,15 @@ public:
     bool isSubsequence(string s, string t) {
         int n = s.size();
         int m = t.size();
-        int j = 0;
+        int count = 0;
         for(int i=0;i<n;i++){
-            while(j<m && t[j] != s[i]){
-                j++;
+            while(count < m && t[count] != s[i]){
+                count++;
             }
-            if(j == m){
+            if(count == m){
                 return false;
             }
-            j++;
+            count++;
         }
         return true;
     }
