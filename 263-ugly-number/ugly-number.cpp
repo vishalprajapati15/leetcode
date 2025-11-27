@@ -1,18 +1,24 @@
 class Solution {
 public:
-    bool isUgly(int n) {
-        int prime[3] = {2, 3, 5};
-        if(n < 1){
-            return false;
+    bool checkIfUgly(int n){
+        if(n ==1){
+            return 1;
         }
-        if(n==1){
-            true;
-        }
-        for(int p : prime){
-            while(n%p == 0){
-                n/=p;
+        if(n>1){
+            if(n%2 == 0){
+                return checkIfUgly(n/2);
+            }else if(n%3==0){
+                return checkIfUgly(n/3);
+            }else if(n%5==0){
+                return checkIfUgly(n/5);
+            }else{
+                return 0;
             }
         }
-        return n == 1;
+        return false;
     }
+    bool isUgly(int n) {
+        return checkIfUgly(n);
+    }
+    
 };
