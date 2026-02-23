@@ -2,6 +2,9 @@ class Solution {
 public:
     bool hasAllCodes(string s, int k) {
         int n = s.size();
+        if(n<k){
+            return false;
+        }
         unordered_set<string> st;
         int code = pow(2, k);
         for(int i=k; i<=n;i++){
