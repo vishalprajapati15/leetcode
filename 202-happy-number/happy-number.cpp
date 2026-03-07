@@ -11,9 +11,7 @@ public:
     }
 
     bool isHappy(int n) {
-        unordered_set<int>st;
-        while (n != 1 && !st.count(n)) {
-            st.insert(n);
+        while (n != 1 && n!= 4) {
             n = sol(n);
         }
         return n==1;
