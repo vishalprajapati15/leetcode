@@ -1,20 +1,25 @@
 class Solution {
 public:
     int thirdMax(vector<int>& nums) {
-        unordered_set<int>st;
-        for(int num : nums){
-            st.insert(num);
-        }
-        vector<int>temp;
-        for(int ele : st){
-            temp.push_back(ele);
-        }
+        long long first = LLONG_MIN, second = LLONG_MIN, third = LLONG_MIN;
 
-        sort(temp.begin(), temp.end());
-        int n = temp.size();
-        if(n<3){
-            return temp[n-1];
+        for(int num : nums){
+            if(num == first || num == second || num == third){
+                continue;
+            }
+            if(num > first){
+                third = second;
+                second = first;
+                first = num;
+            }
+            else if(num > second){
+                third = second;
+                second = num;
+            }
+            else if(num > third){
+                third = num;
+            }
         }
-        return temp[n-3];
+        return (third == LLONG_MIN) ? first : third;
     }
 };
