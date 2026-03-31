@@ -7,6 +7,9 @@ public:
             if(n % i ==0){
                 sum += i;
             }
+            if(sum < i){
+                return false;
+            }
         }
 
         return num == sum;
